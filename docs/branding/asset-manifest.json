@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "status": "tidal-integrated-real-data-default-window-reviewed",
+  "selectedDirection": "tidal",
+  "pathBase": "repository-root",
+  "assets": [
+    { "direction": "tidal", "kind": "review-board", "status": "generated-selected", "path": "Resources/Branding/Concepts/01-tidal-board.png" },
+    { "direction": "signal", "kind": "review-board", "status": "generated-not-selected", "path": "Resources/Branding/Concepts/02-signal-board.png" },
+    { "direction": "harbor", "kind": "review-board", "status": "generated-not-selected", "path": "Resources/Branding/Concepts/03-harbor-board.png" },
+    { "direction": "tidal", "kind": "primary-mark-transparent", "status": "generated-alpha-verified", "path": "Resources/Branding/Tidal/TidalMark.png" },
+    { "direction": "tidal", "kind": "wordmark-lockup", "status": "native-default-window-verified", "path": "Sources/iCloudDriveManager/Views/DriveSidebar.swift" },
+    { "direction": "tidal", "kind": "monochrome-template-mark", "status": "native-image-decoding-and-visible-rendering-verified", "path": "Sources/iCloudDriveManager/Views/BrandTheme.swift" },
+    { "direction": "tidal", "kind": "icon-composer-document", "status": "saved-default-dark-mono-reviewed", "path": "Resources/Branding/Tidal/AppIcon.icon" },
+    { "direction": "tidal", "kind": "macos15-icns", "status": "exported-by-apple-actool", "path": "Resources/CompiledIcon/AppIcon.icns" },
+    { "direction": "tidal", "kind": "layered-icon-catalog", "status": "exported-by-apple-actool", "path": "Resources/CompiledIcon/Assets.car" },
+    { "direction": "tidal", "kind": "icon-preview-1024", "status": "exported-by-apple-ictool-and-inspected", "path": "Resources/CompiledIcon/AppIcon-preview.png" },
+    { "direction": "tidal", "kind": "icon-bundle-metadata", "status": "exported-by-apple-actool", "path": "Resources/CompiledIcon/icon-info.plist" },
+    { "direction": "tidal", "kind": "native-app-integration", "status": "actual-real-data-default-window-layout-verified", "path": "Sources/iCloudDriveManager" }
+  ]
+}

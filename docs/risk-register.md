@@ -1,0 +1,19 @@
+# Risk register
+
+Review date: 2026-11-01. This register records bounded MVP risks; a local build does not close release acceptance.
+
+| Risk | Likelihood | Impact | Mitigation | Owner | Status |
+|---|---|---|---|---|---|
+| Metadata omits items because indexing or access is incomplete | High | High | Direct metadata discovery independent of Spotlight; cancellable progressive results; retain unknowns and coverage warnings | Core/UI | Zero-item defect corrected; populated real progressive results passed; complete coverage unqualified |
+| Main use case cannot cancel Finder/macOS pre-existing queue | High | High | State unavailability prominently; research verified targeted mechanism; no eviction, global pause, or daemon-control substitution | Integration/research | Unresolved; blocks main-goal completion |
+| Active diagnostic record count is mistaken for complete Finder backlog | High | High | Separate provider backlog, published batches, brctl records and app requests; no source sums; explicit units and observation times | UI/Core | Source review and actual panel passed; earlier 42-test pass preserved, latest bookmark test failing; main cancellation unresolved |
+| Folder change or symlink causes a request outside the authorized root | Low | High | Canonical containment, per-request resource validation, session reset, regression tests | Core | Monitoring |
+| Request stays submitted because metadata never confirms a terminal result | Medium | Medium | Show submitted state honestly; allow observation refresh; explain macOS owns completion; inspect real provider behavior | Core | Open |
+| UI stalls on the actual large iCloud library | Medium | High | Cancellable off-main filtered/sorted cache; snapshot summaries once; avoid all-library work in row/body paths; actual read-only responsiveness acceptance | App integration | Observed sorting failure corrected and actual responsive inspection passed; broader profiling remains |
+| Protected bookmark record cannot be reopened, or restoration fails after identity/signing/folder/OS changes | Medium | Medium | Handle stale/corrupt/unsupported records; user can select folder again; no auto-replayed jobs | Persistence | Latest round-trip test and current real-app restoration fail with Cocoa 257/POSIX EPERM; preserve record, no assumed recovery; cause unestablished |
+| Sensitive paths or names appear in diagnostics or screenshots | Medium | Medium | No remote telemetry; redact app logs; explain local display; protect bookmark record with user permissions | Security/UI | Monitoring |
+| Deployment target is mistaken for verified compatibility | Medium | High | Maintain explicit matrix for macOS 15/26/27 and Intel/Apple silicon; qualify real hardware before release | Release owner | Open |
+| Development bundle is distributed without proper signing or notarization | Low | High | Label development build; separate local runnable artifact from release; require explicit release authorization | Release owner | Open |
+| Error/conflict behavior is not represented by available real-account observations | Medium | High | Read-only acceptance against existing selected data; no seeded library, forced conflicts, or automatic resolution | QA | Open |
+| Undocumented system diagnostics change format or scope | Medium | High | Separate whole-account labels; fixed read-only command with output cap; unavailable on parse failure; cross-OS qualification | Core/service | Previous brctl response passed; new provider-filtered command/parser actual pass; actual new backlog panel passed; other OS formats pending |
+| Embedded unsandboxed status reader exceeds intended authority | Low | High | No admin rights, client command/path inputs, mutation commands, raw CLI replies, or helper installation; same-user signed enclosing-app client check | Security/service | Source review and actual embedded-client response passed; distribution security qualification remains |
