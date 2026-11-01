@@ -35,7 +35,10 @@ struct DriveSidebar: View {
             .fixedSize(horizontal: false, vertical: true)
 
             List(selection: $section) {
-                Section("Library") {
+                Section("iCloud activity") {
+                    sidebarRow(.systemDownloads)
+                }
+                Section("Selected folder") {
                     ForEach([DriveSection.all, .activity, .cloud, .attention]) { destination in
                         sidebarRow(destination)
                     }
@@ -55,7 +58,9 @@ struct DriveSidebar: View {
                         .fill(model.rootURL == nil ? Color.secondary : BrandTheme.accent)
                         .frame(width: 6, height: 6)
                     Text(
-                        model.rootURL == nil ? "No folder selected" : "Observing folder"
+                        model.rootURL == nil
+                            ? "No folder selected"
+                            : model.hasStartedFileObservation ? "Observing folder" : "Folder connected"
                     )
                     .font(.system(size: 11, weight: .medium))
                     .foregroundStyle(.secondary)
@@ -119,17 +124,26 @@ struct DriveSidebar: View {
 
     private func purpose(for destination: DriveSection) -> String {
         switch destination {
+        case .systemDownloads:
+            return "macOS download backlog and published transfer batches. "
+                + "Diagnostic status records are separate from the full Finder queue."
         case .all:
             return "All files and folders discovered in your selected folder, "
                 + "including items with unknown status."
         case .activity: return "Items with transfer activity reported by macOS in your selected folder."
         case .cloud: return "Items macOS reports as stored in iCloud without a local copy."
         case .attention: return "Items with reported version conflicts or local macOS metadata warnings."
-        case .queue: return "This app's download plans and pending requests. Apple controls actual transfer scheduling."
+        case .queue:
+            return "Download plans and requests created in this app. "
+                + "These controls do not cancel downloads already queued by Finder."
         }
     }
 
     private func countLabel(for destination: DriveSection) -> String {
+        if destination == .systemDownloads {
+            return model.systemBacklog?.pendingItemCount.formatted() ?? "Unavailable"
+        }
+        if destination != .queue && !model.hasStartedFileObservation { return "Not scanned" }
         let value = count(for: destination)
         if destination != .all && destination != .queue && value == 0
             && model.unknownItemCount > 0
@@ -145,6 +159,7 @@ struct DriveSidebar: View {
                 .count
         }
         switch destination {
+        case .systemDownloads: return model.systemBacklog?.pendingItemCount ?? 0
         case .all: return model.items.count
         case .activity: return model.reportedActivityCount
         case .cloud: return model.cloudOnlyCount

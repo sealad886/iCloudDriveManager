@@ -6,6 +6,9 @@ enum RowHoverContent {
     case file(DriveItem)
     case request(DownloadQueueItem, isDryRun: Bool)
     case navigation(title: String, purpose: String, count: String)
+    case systemBacklog(SystemBacklogSnapshot)
+    case publishedTransfer(PublishedTransferSnapshot)
+    case diagnostic(title: String, count: Int?, logicalBytes: Int64?)
 }
 
 /// A passive detail card built only from the row's existing in-memory snapshot.
@@ -53,6 +56,38 @@ struct RowHoverCard: View {
                 note(purpose)
                 Divider()
                 field("Reported count", count)
+            case .systemBacklog(let snapshot):
+                heading("System download backlog", symbol: "icloud.and.arrow.down")
+                field("Pending items", snapshot.pendingItemCount.formatted())
+                field("Requested logical size", DriveFormatting.bytes(snapshot.logicalBytes))
+                note(snapshot.scopeDescription)
+                note(
+                    "Logical size describes requested items, not network bytes remaining. This source can overlap with published batches and diagnostic records."
+                )
+                field("Observed", snapshot.observedAt.formatted(date: .abbreviated, time: .shortened))
+            case .publishedTransfer(let snapshot):
+                heading(snapshot.description, symbol: "arrow.triangle.2.circlepath")
+                if let description = snapshot.additionalDescription { note(description) }
+                field("Reported direction", snapshot.reportedDirection)
+                if let bytes = snapshot.validByteCounts {
+                    field("Batch completed", DriveFormatting.bytes(bytes.completed))
+                    field("Batch total", DriveFormatting.bytes(bytes.total))
+                } else {
+                    field("Byte progress", "Not published")
+                }
+                field("Published cancellation", snapshot.isCancellable ? "Advertised; not verified" : "Unavailable")
+                field("Published pause", snapshot.isPausable ? "Advertised; not verified" : "Unavailable")
+                note(
+                    "macOS publishes this batch. It is not an individual queued-file listing, and cancellation of Finder queued downloads is not yet verified."
+                )
+                field("Observed", snapshot.observedAt.formatted(date: .abbreviated, time: .shortened))
+            case .diagnostic(let title, let count, let bytes):
+                heading(title, symbol: "info.circle")
+                field("Diagnostic records", count.map { $0.formatted() } ?? "Unavailable")
+                field("Logical size", bytes.map { DriveFormatting.bytes($0) } ?? "Unavailable")
+                note(
+                    "Source: brctl status, across the iCloud account. These records are not the full Finder download queue. Logical size is not remaining network traffic."
+                )
             }
         }
         .font(.system(size: 12))

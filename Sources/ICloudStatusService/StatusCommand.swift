@@ -1,7 +1,28 @@
 import Darwin
+import DriveCore
 import Foundation
 
 enum StatusCommand {
+    /// This internal allowlist cannot be selected or extended by an XPC caller.
+    enum Observation: Hashable {
+        case cloudStatus
+        case fileProviderBacklog
+
+        var executable: String {
+            switch self {
+            case .cloudStatus: return "/usr/bin/brctl"
+            case .fileProviderBacklog: return "/usr/bin/fileproviderctl"
+            }
+        }
+
+        var arguments: [String] {
+            switch self {
+            case .cloudStatus: return ["status"]
+            case .fileProviderBacklog: return ["dump", "-l", FileProviderBacklogParser.iCloudProviderIdentifier]
+            }
+        }
+    }
+
     enum Failure: Error {
         case launch, outputLimit, read, unsuccessfulExit, invalidEncoding
 
@@ -17,10 +38,10 @@ enum StatusCommand {
         }
     }
 
-    static func readOutput() throws -> String {
+    static func readOutput(for observation: Observation) throws -> String {
         let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/brctl")
-        process.arguments = ["status"]
+        process.executableURL = URL(fileURLWithPath: observation.executable)
+        process.arguments = observation.arguments
         process.environment = ["PATH": "/usr/bin:/bin", "LANG": "en_US.UTF-8", "LC_ALL": "en_US.UTF-8"]
         process.currentDirectoryURL = URL(fileURLWithPath: "/", isDirectory: true)
         process.standardInput = FileHandle.nullDevice

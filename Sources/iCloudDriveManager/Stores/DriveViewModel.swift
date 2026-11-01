@@ -18,6 +18,12 @@ final class DriveViewModel: ObservableObject {
     @Published private(set) var systemActivity: SystemActivitySnapshot?
     @Published private(set) var isReadingSystemActivity = false
     @Published private(set) var systemActivityError: String?
+    @Published private(set) var publishedTransfers: [PublishedTransferSnapshot] = []
+    @Published private(set) var systemBacklog: SystemBacklogSnapshot?
+    @Published private(set) var isReadingBacklog = false
+    @Published private(set) var systemProgressError: String?
+    @Published private(set) var systemBacklogError: String?
+    @Published private(set) var hasStartedFileObservation = false
     @Published var notice: String?
     @Published var errorMessage: String?
     @Published var isShowingLongDiscoveryNotice = false
@@ -27,6 +33,7 @@ final class DriveViewModel: ObservableObject {
 
     private let monitor = MetadataMonitor()
     private let systemMonitor = SystemActivityMonitor()
+    private let transfersMonitor = SystemTransfersMonitor()
     private let queue = DownloadQueue()
     private var storage: BookmarkStore?
     private var accessedURL: URL?
@@ -47,6 +54,17 @@ final class DriveViewModel: ObservableObject {
         storage = store
         monitor.onLongDiscovery = { [weak self] in
             self?.isShowingLongDiscoveryNotice = true
+        }
+        transfersMonitor.onProgress = { [weak self] transfers, error in
+            guard let self else { return }
+            self.publishedTransfers = transfers
+            self.systemProgressError = error
+        }
+        transfersMonitor.onBacklog = { [weak self] backlog, isReading, error in
+            guard let self else { return }
+            self.systemBacklog = backlog
+            self.isReadingBacklog = isReading
+            self.systemBacklogError = error
         }
         systemMonitor.onChange = { [weak self] snapshot, isReading, error in
             guard let self else { return }
@@ -114,8 +132,27 @@ final class DriveViewModel: ObservableObject {
     func refresh() {
         guard rootURL != nil else { return }
         isShowingLongDiscoveryNotice = false
-        monitor.refresh()
+        if hasStartedFileObservation { monitor.refresh() }
         systemMonitor.refresh()
+        transfersMonitor.refresh()
+    }
+
+    func refreshSystemTransfers() {
+        guard rootURL != nil else { return }
+        systemMonitor.refresh()
+        transfersMonitor.refresh()
+    }
+
+    /// Detailed folder reads start only when the user opens the file browser.
+    func beginFileObservation() {
+        guard !hasStartedFileObservation, let rootURL else { return }
+        do {
+            hasStartedFileObservation = true
+            try monitor.start(root: rootURL)
+        } catch {
+            hasStartedFileObservation = false
+            errorMessage = "Folder metadata could not be read. \(error.localizedDescription)"
+        }
     }
 
     func continueDiscovery() {
@@ -279,21 +316,17 @@ final class DriveViewModel: ObservableObject {
         accessedURL = accessStarted ? url : nil
         retained = true
         rootURL = url
-        isGathering = true
+        isGathering = false
         errorMessage = nil
-        do {
-            try monitor.start(root: url)
-            systemMonitor.start()
-            logger.info("Folder metadata monitoring started")
-        } catch {
-            endSession()
-            throw error
-        }
+        systemMonitor.start()
+        transfersMonitor.start()
+        logger.info("System transfer observation started; folder metadata is read on demand")
     }
 
     private func endSession() {
         monitor.stop()
         systemMonitor.stop()
+        transfersMonitor.stop()
         queue.reset()
         accessedURL?.stopAccessingSecurityScopedResource()
         accessedURL = nil
@@ -307,6 +340,12 @@ final class DriveViewModel: ObservableObject {
         systemActivity = nil
         isReadingSystemActivity = false
         systemActivityError = nil
+        publishedTransfers = []
+        systemBacklog = nil
+        isReadingBacklog = false
+        systemProgressError = nil
+        systemBacklogError = nil
+        hasStartedFileObservation = false
         isShowingLongDiscoveryNotice = false
     }
 }

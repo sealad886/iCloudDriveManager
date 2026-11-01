@@ -22,13 +22,13 @@ struct DownloadRequestsView: View {
             VStack(alignment: .leading, spacing: 18) {
                 HStack(alignment: .top, spacing: 20) {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Download requests")
+                        Text("App requests")
                             .font(.system(size: 26, weight: .semibold))
                             .tracking(-0.5)
                         Text(
                             model.isDryRun
-                                ? "Review the downloads you would request for this Mac."
-                                : "Bring the files you need to this Mac."
+                                ? "Download plans created in this app."
+                                : "Download requests created in this app."
                         )
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)

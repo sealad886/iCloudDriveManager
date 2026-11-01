@@ -3,22 +3,24 @@ import DriveCore
 import SwiftUI
 
 enum DriveSection: String, CaseIterable, Identifiable {
-    case all, activity, cloud, attention, queue
+    case systemDownloads, all, activity, cloud, attention, queue
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
+        case .systemDownloads: return "System downloads"
         case .all: return "All files"
         case .activity: return "Sync activity"
         case .cloud: return "In iCloud"
         case .attention: return "Needs attention"
-        case .queue: return "Download requests"
+        case .queue: return "App requests"
         }
     }
 
     var symbol: String {
         switch self {
+        case .systemDownloads: return "icloud.and.arrow.down"
         case .all: return "square.grid.2x2"
         case .activity: return "arrow.triangle.2.circlepath"
         case .cloud: return "icloud"
@@ -33,7 +35,7 @@ enum DriveSection: String, CaseIterable, Identifiable {
         case .activity: return item.state.isActive || item.state == .queued || item.state == .pendingUpload
         case .cloud: return item.state == .cloudOnly
         case .attention: return item.state.needsAttention
-        case .queue: return false
+        case .systemDownloads, .queue: return false
         }
     }
 }

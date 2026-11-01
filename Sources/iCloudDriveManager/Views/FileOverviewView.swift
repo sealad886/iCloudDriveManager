@@ -92,6 +92,7 @@ struct FileOverviewView: View {
             .fixedSize(horizontal: false, vertical: true)
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+        .onAppear { model.beginFileObservation() }
         .onReceive(model.$items) { items in
             updateQuery(items: items, clearResults: queryRootURL != model.rootURL?.standardizedFileURL)
         }

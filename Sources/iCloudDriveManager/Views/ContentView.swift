@@ -3,7 +3,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var model: DriveViewModel
-    @State private var section: DriveSection? = .all
+    @State private var section: DriveSection? = .systemDownloads
     @State private var search = ""
     @State private var selectedIDs = Set<String>()
     @State private var showingInspector = false
@@ -17,15 +17,17 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             DriveSidebar(section: $section)
-                .navigationSplitViewColumnWidth(min: 185, ideal: 210, max: 260)
+                .navigationSplitViewColumnWidth(min: 225, ideal: 250, max: 310)
         } detail: {
             VStack(spacing: 0) {
                 ActionModeBanner(isDryRun: model.isDryRun)
-                if let notice = model.notice, connected {
+                if let notice = model.notice, connected, section != .systemDownloads {
                     NoticeStrip(symbol: "info.circle", title: notice, tint: .secondary)
                 }
                 if connected {
-                    if section == .queue {
+                    if section == .systemDownloads || section == nil {
+                        SystemDownloadsView(search: search)
+                    } else if section == .queue {
                         DownloadRequestsView(search: search)
                     } else {
                         FileOverviewView(
@@ -40,7 +42,7 @@ struct ContentView: View {
                 }
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-            .navigationTitle(section == .queue ? "Download requests" : BrandTheme.productName)
+            .navigationTitle(section?.title ?? BrandTheme.productName)
             .searchable(text: $search, placement: .toolbar, prompt: "Search files and folders")
             .toolbar {
                 ToolbarItemGroup(placement: .primaryAction) {
@@ -49,18 +51,24 @@ struct ContentView: View {
                     }
                     .help("Choose an iCloud Drive folder to observe")
                     .keyboardShortcut("o", modifiers: [.command])
-                    Button(action: model.refresh) {
+                    Button {
+                        if section == .systemDownloads || section == nil {
+                            model.refreshSystemTransfers()
+                        } else {
+                            model.refresh()
+                        }
+                    } label: {
                         Label("Refresh", systemImage: "arrow.clockwise")
                     }
                     .disabled(!connected)
                     .keyboardShortcut("r", modifiers: [.command])
-                    .help("Refresh reported file metadata")
+                    .help("Refresh the current view's macOS observations")
                     Button {
                         showingInspector.toggle()
                     } label: {
                         Label("File details", systemImage: "sidebar.right")
                     }
-                    .disabled(!connected || section == .queue)
+                    .disabled(!connected || section == .queue || section == .systemDownloads || section == nil)
                     .help("Show selected file details")
                     Button {
                         showingHelp.toggle()
@@ -104,12 +112,17 @@ struct ContentView: View {
         }
         .onChange(of: model.rootURL) { _, _ in
             selectedIDs.removeAll()
-            section = .all
+            section = .systemDownloads
             showingInspector = false
         }
         .onChange(of: model.lastUpdated) { _, _ in
             guard !selectedIDs.isEmpty else { return }
             selectedIDs.formIntersection(model.items.lazy.map(\.id))
+        }
+        .onChange(of: section) { _, destination in
+            if destination == .systemDownloads || destination == .queue {
+                showingInspector = false
+            }
         }
     }
 }
@@ -123,7 +136,10 @@ private struct SyncHelpView: View {
                 "This app observes the file metadata macOS makes available in your selected folder. Indexing, provider support, permissions, and network availability can affect which files and states appear."
             )
             Text(
-                "Download requests are this app’s list of requests to macOS. Apple controls transfer scheduling, upload order, and the system-wide sync queue. Pausing requests affects only requests this app has not submitted yet."
+                "System downloads shows macOS backlog observations and published transfer batches. These sources can overlap and are not added together. brctl diagnostic records do not describe the full Finder download queue."
+            )
+            Text(
+                "App requests manages requests created in this app. Its controls do not cancel downloads already queued by Finder. Cancellation of Finder queued downloads is not yet verified."
             )
             Text(
                 "Dry run uses your real folder metadata and records planned actions without requesting downloads. Enable live actions in Settings when you want to send requests to macOS."

@@ -10,6 +10,7 @@
     <key>LSMinimumSystemVersion</key><string>15.0</string>
     <key>XPCService</key><dict>
         <key>ServiceType</key><string>Application</string>
-        <key>RunLoopType</key><string>dispatch_main</string>
+        <key>RunLoopType</key><string>NSRunLoop</string>
+        <key>JoinExistingSession</key><true/>
     </dict>
 </dict></plist>
