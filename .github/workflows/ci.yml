@@ -1,0 +1,44 @@
+name: Native macOS validation
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-26]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: swift --version
+      - name: Lint, typecheck, unit and native UI smoke tests
+        run: ./script/check.sh
+      - name: Build sandboxed universal app
+        run: ./script/build_and_run.sh --universal --build-only
+      - name: Verify architectures and minimum OS
+        run: |
+          APP_ARCHITECTURES="$(lipo -archs dist/iCloudDriveManager.app/Contents/MacOS/iCloudDriveManager)"
+          [[ " $APP_ARCHITECTURES " == *" arm64 "* && " $APP_ARCHITECTURES " == *" x86_64 "* ]]
+          vtool -show-build dist/iCloudDriveManager.app/Contents/MacOS/iCloudDriveManager
+          codesign --verify --strict dist/iCloudDriveManager.app
+      - name: Archive preserving app permissions
+        run: ditto -c -k --sequesterRsrc --keepParent dist/iCloudDriveManager.app dist/iCloudDriveManager.zip
+      - name: Upload development app
+        uses: actions/upload-artifact@v4
+        with:
+          name: iCloudDriveManager-${{ matrix.os }}-development
+          path: dist/iCloudDriveManager.zip
+  source-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scan source for credentials
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

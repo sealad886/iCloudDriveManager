@@ -1,0 +1,825 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 71;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A00000000000000000000016 /* DriveCore in Frameworks */ = {isa = PBXBuildFile; productRef = A00000000000000000000015 /* DriveCore */; };
+		A00000000000000000000018 /* DrivePersistence in Frameworks */ = {isa = PBXBuildFile; productRef = A00000000000000000000017 /* DrivePersistence */; };
+		A0000000000000000000001A /* DriveCore in Frameworks */ = {isa = PBXBuildFile; productRef = A00000000000000000000019 /* DriveCore */; };
+		A0000000000000000000001C /* DrivePersistence in Frameworks */ = {isa = PBXBuildFile; productRef = A0000000000000000000001B /* DrivePersistence */; };
+		A0000000000000000000001D /* Assets.car in Resources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000005 /* Assets.car */; };
+		A0000000000000000000001E /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000004 /* AppIcon.icns */; };
+		B00000000000000000000008 /* DriveCore in Frameworks */ = {isa = PBXBuildFile; productRef = B00000000000000000000007 /* DriveCore */; };
+		B0000000000000000000000F /* ICloudStatusService.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* ICloudStatusService.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A0000000000000000000002A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A00000000000000000000028 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A00000000000000000000029;
+			remoteInfo = iCloudDriveManager;
+		};
+		B0000000000000000000000C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A00000000000000000000028 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B00000000000000000000001;
+			remoteInfo = ICloudStatusService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B0000000000000000000000E /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				B0000000000000000000000F /* ICloudStatusService.xpc in Embed XPC Services */,
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A00000000000000000000001 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		A00000000000000000000002 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A00000000000000000000003 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+		A00000000000000000000004 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		A00000000000000000000005 /* Assets.car */ = {isa = PBXFileReference; lastKnownFileType = file; path = Assets.car; sourceTree = "<group>"; };
+		A00000000000000000000006 /* Branding/Tidal/AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Branding/Tidal/AppIcon.icon; sourceTree = "<group>"; };
+		A00000000000000000000007 /* iCloudDriveManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCloudDriveManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00000000000000000000008 /* DriveCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DriveCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00000000000000000000009 /* DrivePersistenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrivePersistenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0000000000000000000000A /* DriveAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DriveAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000002 /* ICloudStatusService.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = ICloudStatusService.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B00000000000000000000010 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B00000000000000000000001 /* ICloudStatusService */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A0000000000000000000000B /* Sources/iCloudDriveManager */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Sources/iCloudDriveManager; sourceTree = "<group>"; };
+		A0000000000000000000000C /* Tests/DriveCoreTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests/DriveCoreTests; sourceTree = "<group>"; };
+		A0000000000000000000000D /* Tests/DrivePersistenceTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests/DrivePersistenceTests; sourceTree = "<group>"; };
+		A0000000000000000000000E /* Tests/DriveAppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests/DriveAppTests; sourceTree = "<group>"; };
+		B00000000000000000000003 /* Sources/ICloudStatusService */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (B00000000000000000000010 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Sources/ICloudStatusService; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A00000000000000000000020 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00000000000000000000016 /* DriveCore in Frameworks */,
+				A00000000000000000000018 /* DrivePersistence in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000022 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0000000000000000000001A /* DriveCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000024 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0000000000000000000001C /* DrivePersistence in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000026 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B00000000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000008 /* DriveCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A0000000000000000000000F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A0000000000000000000000C /* Tests/DriveCoreTests */,
+				A0000000000000000000000D /* Tests/DrivePersistenceTests */,
+				A0000000000000000000000E /* Tests/DriveAppTests */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000010 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000002 /* Info.plist */,
+				A00000000000000000000003 /* App.entitlements */,
+				A00000000000000000000013 /* CompiledIcon */,
+				A00000000000000000000006 /* Branding/Tidal/AppIcon.icon */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000011 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000002 /* ICloudStatusService.xpc */,
+				A00000000000000000000007 /* iCloudDriveManager.app */,
+				A00000000000000000000008 /* DriveCoreTests.xctest */,
+				A00000000000000000000009 /* DrivePersistenceTests.xctest */,
+				A0000000000000000000000A /* DriveAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000012 = {
+			isa = PBXGroup;
+			children = (
+				A0000000000000000000000B /* Sources/iCloudDriveManager */,
+				B00000000000000000000003 /* Sources/ICloudStatusService */,
+				A0000000000000000000000F /* Tests */,
+				A00000000000000000000010 /* Resources */,
+				A00000000000000000000001 /* Package.swift */,
+				A00000000000000000000011 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A00000000000000000000013 /* CompiledIcon */ = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000005 /* Assets.car */,
+				A00000000000000000000004 /* AppIcon.icns */,
+			);
+			path = CompiledIcon;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A00000000000000000000029 /* iCloudDriveManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0000000000000000000002C /* Build configuration list for PBXNativeTarget "iCloudDriveManager" */;
+			buildPhases = (
+				A0000000000000000000001F /* Sources */,
+				A00000000000000000000020 /* Frameworks */,
+				A00000000000000000000021 /* Resources */,
+				B0000000000000000000000E /* Embed XPC Services */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0000000000000000000000D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A0000000000000000000000B /* Sources/iCloudDriveManager */,
+			);
+			name = iCloudDriveManager;
+			packageProductDependencies = (
+				A00000000000000000000015 /* DriveCore */,
+				A00000000000000000000017 /* DrivePersistence */,
+			);
+			productName = iCloudDriveManager;
+			productReference = A00000000000000000000007 /* iCloudDriveManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A0000000000000000000002E /* DriveCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0000000000000000000002D /* Build configuration list for PBXNativeTarget "DriveCoreTests" */;
+			buildPhases = (
+				A00000000000000000000080 /* Sources */,
+				A00000000000000000000022 /* Frameworks */,
+				A00000000000000000000023 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A0000000000000000000000C /* Tests/DriveCoreTests */,
+			);
+			name = DriveCoreTests;
+			packageProductDependencies = (
+				A00000000000000000000019 /* DriveCore */,
+			);
+			productName = DriveCoreTests;
+			productReference = A00000000000000000000008 /* DriveCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A00000000000000000000030 /* DrivePersistenceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0000000000000000000002F /* Build configuration list for PBXNativeTarget "DrivePersistenceTests" */;
+			buildPhases = (
+				A00000000000000000000081 /* Sources */,
+				A00000000000000000000024 /* Frameworks */,
+				A00000000000000000000025 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A0000000000000000000000D /* Tests/DrivePersistenceTests */,
+			);
+			name = DrivePersistenceTests;
+			packageProductDependencies = (
+				A0000000000000000000001B /* DrivePersistence */,
+			);
+			productName = DrivePersistenceTests;
+			productReference = A00000000000000000000009 /* DrivePersistenceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A00000000000000000000032 /* DriveAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A00000000000000000000031 /* Build configuration list for PBXNativeTarget "DriveAppTests" */;
+			buildPhases = (
+				A00000000000000000000082 /* Sources */,
+				A00000000000000000000026 /* Frameworks */,
+				A00000000000000000000027 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A0000000000000000000002B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A0000000000000000000000E /* Tests/DriveAppTests */,
+			);
+			name = DriveAppTests;
+			packageProductDependencies = (
+			);
+			productName = DriveAppTests;
+			productReference = A0000000000000000000000A /* DriveAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B00000000000000000000001 /* ICloudStatusService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0000000000000000000000B /* Build configuration list for PBXNativeTarget "ICloudStatusService" */;
+			buildPhases = (
+				B00000000000000000000004 /* Sources */,
+				B00000000000000000000005 /* Frameworks */,
+				B00000000000000000000006 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B00000000000000000000003 /* Sources/ICloudStatusService */,
+			);
+			name = ICloudStatusService;
+			packageProductDependencies = (
+				B00000000000000000000007 /* DriveCore */,
+			);
+			productName = ICloudStatusService;
+			productReference = B00000000000000000000002 /* ICloudStatusService.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A00000000000000000000028 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					A00000000000000000000029 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					A0000000000000000000002E = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					A00000000000000000000030 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					A00000000000000000000032 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = A00000000000000000000029;
+					};
+					B00000000000000000000001 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+				};
+			};
+			buildConfigurationList = A0000000000000000000003D /* Build configuration list for PBXProject "iCloudDriveManager" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A00000000000000000000012;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A00000000000000000000014 /* XCLocalSwiftPackageReference "." */,
+			);
+			productRefGroup = A00000000000000000000011 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A00000000000000000000029 /* iCloudDriveManager */,
+				B00000000000000000000001 /* ICloudStatusService */,
+				A0000000000000000000002E /* DriveCoreTests */,
+				A00000000000000000000030 /* DrivePersistenceTests */,
+				A00000000000000000000032 /* DriveAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A00000000000000000000021 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0000000000000000000001D /* Assets.car in Resources */,
+				A0000000000000000000001E /* AppIcon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000023 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000025 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000027 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B00000000000000000000006 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A0000000000000000000001F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000080 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000081 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A00000000000000000000082 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B00000000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A0000000000000000000002B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A00000000000000000000029 /* iCloudDriveManager */;
+			targetProxy = A0000000000000000000002A /* PBXContainerItemProxy */;
+		};
+		B0000000000000000000000D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B00000000000000000000001 /* ICloudStatusService */;
+			targetProxy = B0000000000000000000000C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A00000000000000000000033 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A00000000000000000000034 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Resources/App.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager;
+				PRODUCT_MODULE_NAME = iCloudDriveManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A00000000000000000000035 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager.DriveCoreTests;
+				PRODUCT_MODULE_NAME = DriveCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A00000000000000000000036 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager.DrivePersistenceTests;
+				PRODUCT_MODULE_NAME = DrivePersistenceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A00000000000000000000037 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager.DriveAppTests;
+				PRODUCT_MODULE_NAME = DriveAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iCloudDriveManager.app/Contents/MacOS/iCloudDriveManager";
+			};
+			name = Debug;
+		};
+		A00000000000000000000038 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A00000000000000000000039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Resources/App.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager;
+				PRODUCT_MODULE_NAME = iCloudDriveManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A0000000000000000000003A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager.DriveCoreTests;
+				PRODUCT_MODULE_NAME = DriveCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A0000000000000000000003B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager.DrivePersistenceTests;
+				PRODUCT_MODULE_NAME = DrivePersistenceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A0000000000000000000003C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager.DriveAppTests;
+				PRODUCT_MODULE_NAME = DriveAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iCloudDriveManager.app/Contents/MacOS/iCloudDriveManager";
+			};
+			name = Release;
+		};
+		B00000000000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Sources/ICloudStatusService/Service.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/ICloudStatusService/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@loader_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager.ICloudStatusService;
+				PRODUCT_MODULE_NAME = ICloudStatusService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B0000000000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Sources/ICloudStatusService/Service.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/ICloudStatusService/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@loader_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.iCloudDriveManager.ICloudStatusService;
+				PRODUCT_MODULE_NAME = ICloudStatusService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A0000000000000000000002C /* Build configuration list for PBXNativeTarget "iCloudDriveManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00000000000000000000034 /* Debug */,
+				A00000000000000000000039 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0000000000000000000002D /* Build configuration list for PBXNativeTarget "DriveCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00000000000000000000035 /* Debug */,
+				A0000000000000000000003A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0000000000000000000002F /* Build configuration list for PBXNativeTarget "DrivePersistenceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00000000000000000000036 /* Debug */,
+				A0000000000000000000003B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A00000000000000000000031 /* Build configuration list for PBXNativeTarget "DriveAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00000000000000000000037 /* Debug */,
+				A0000000000000000000003C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0000000000000000000003D /* Build configuration list for PBXProject "iCloudDriveManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00000000000000000000033 /* Debug */,
+				A00000000000000000000038 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0000000000000000000000B /* Build configuration list for PBXNativeTarget "ICloudStatusService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B00000000000000000000009 /* Debug */,
+				B0000000000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		A00000000000000000000014 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A00000000000000000000015 /* DriveCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A00000000000000000000014 /* XCLocalSwiftPackageReference "." */;
+			productName = DriveCore;
+		};
+		A00000000000000000000017 /* DrivePersistence */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A00000000000000000000014 /* XCLocalSwiftPackageReference "." */;
+			productName = DrivePersistence;
+		};
+		A00000000000000000000019 /* DriveCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A00000000000000000000014 /* XCLocalSwiftPackageReference "." */;
+			productName = DriveCore;
+		};
+		A0000000000000000000001B /* DrivePersistence */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A00000000000000000000014 /* XCLocalSwiftPackageReference "." */;
+			productName = DrivePersistence;
+		};
+		B00000000000000000000007 /* DriveCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A00000000000000000000014 /* XCLocalSwiftPackageReference "." */;
+			productName = DriveCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A00000000000000000000028 /* Project object */;
+}

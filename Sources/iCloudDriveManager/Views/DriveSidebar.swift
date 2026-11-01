@@ -1,0 +1,134 @@
+import DriveCore
+import SwiftUI
+
+struct DriveSidebar: View {
+    @EnvironmentObject private var model: DriveViewModel
+    @Binding var section: DriveSection?
+
+    var body: some View {
+        VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 11) {
+                HStack(spacing: 9) {
+                    BrandMark(size: 36)
+                    Text("iCloud Drive\nManager")
+                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                        .foregroundStyle(BrandTheme.textAccent)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityLabel(BrandTheme.productName)
+                }
+                Text(BrandTheme.tagline)
+                    .font(.system(size: 11))
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                VStack(alignment: .leading, spacing: 4) {
+                    ActionModeBadge(isDryRun: model.isDryRun)
+                    Text(model.isDryRun ? "Live actions inactive" : "Dry run inactive")
+                        .font(.system(size: 10))
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 18)
+            .padding(.top, 22)
+            .padding(.bottom, 24)
+            .fixedSize(horizontal: false, vertical: true)
+
+            List(selection: $section) {
+                Section("Library") {
+                    ForEach([DriveSection.all, .activity, .cloud, .attention]) { destination in
+                        sidebarRow(destination)
+                    }
+                }
+                Section("Manage") {
+                    sidebarRow(.queue)
+                }
+            }
+            .listStyle(.sidebar)
+            .frame(minHeight: 0, maxHeight: .infinity)
+            .layoutPriority(-1)
+
+            VStack(alignment: .leading, spacing: 11) {
+                Divider()
+                HStack(spacing: 9) {
+                    Circle()
+                        .fill(model.rootURL == nil ? Color.secondary : BrandTheme.accent)
+                        .frame(width: 6, height: 6)
+                    Text(
+                        model.rootURL == nil ? "No folder selected" : "Observing folder"
+                    )
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(.secondary)
+                }
+                if model.rootURL != nil {
+                    HStack(alignment: .top) {
+                        Label(model.scopeName, systemImage: "folder")
+                            .font(.system(size: 12))
+                            .lineLimit(2)
+                            .help(model.rootURL?.path ?? "Selected folder")
+                        Spacer(minLength: 0)
+                        Menu {
+                            Button("Choose another folder…", action: model.chooseFolder)
+                            Button("Disconnect folder", action: model.disconnect)
+                        } label: {
+                            Image(systemName: "ellipsis.circle")
+                        }
+                        .menuStyle(.borderlessButton)
+                        .fixedSize()
+                        .help("Folder options")
+                        .accessibilityLabel("Folder options")
+                    }
+                } else {
+                    Button("Choose folder…", action: model.chooseFolder)
+                        .font(.system(size: 12))
+                }
+                Text("Private to this Mac")
+                    .font(.system(size: 10))
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(.horizontal, 17)
+            .padding(.bottom, 18)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(minHeight: 0, maxHeight: .infinity, alignment: .top)
+    }
+
+    private func sidebarRow(_ destination: DriveSection) -> some View {
+        HStack {
+            Label(destination.title, systemImage: destination.symbol)
+            Spacer(minLength: 4)
+            if model.rootURL != nil {
+                Text(countLabel(for: destination))
+                    .font(.system(size: 11, weight: .medium))
+                    .monospacedDigit()
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .tag(destination)
+        .padding(.vertical, 3)
+        .accessibilityElement(children: .combine)
+    }
+
+    private func countLabel(for destination: DriveSection) -> String {
+        let value = count(for: destination)
+        if destination != .all && destination != .queue && value == 0
+            && model.unknownItemCount > 0
+        {
+            return "—"
+        }
+        return value.formatted()
+    }
+
+    private func count(for destination: DriveSection) -> Int {
+        if destination == .queue {
+            return model.queueItems.filter { $0.status == .planned || $0.status == .waiting || $0.status == .submitted }
+                .count
+        }
+        switch destination {
+        case .all: return model.items.count
+        case .activity: return model.reportedActivityCount
+        case .cloud: return model.cloudOnlyCount
+        case .attention: return model.reportedIssueCount
+        case .queue: return 0
+        }
+    }
+}
