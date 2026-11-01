@@ -14,6 +14,7 @@ struct FileOverviewView: View {
     @State private var queryGeneration = UUID()
     @State private var queryRootURL: URL?
     @State private var queryTask: Task<Void, Never>?
+    @StateObject private var rowHover = RowHoverController()
 
     private var selectedItems: [DriveItem] {
         guard !selectedIDs.isEmpty else { return [] }
@@ -95,20 +96,25 @@ struct FileOverviewView: View {
             updateQuery(items: items, clearResults: queryRootURL != model.rootURL?.standardizedFileURL)
         }
         .onChange(of: section) { _, _ in
+            rowHover.dismiss()
             selectedIDs.removeAll()
             updateQuery(items: model.items, clearResults: true)
         }
         .onChange(of: search) { _, _ in
+            rowHover.dismiss()
             selectedIDs.removeAll()
             updateQuery(items: model.items, clearResults: true)
         }
         .onChange(of: sortOrder.first?.order) { _, _ in
+            rowHover.dismiss()
             updateQuery(items: model.items, clearResults: true)
         }
         .onChange(of: model.rootURL) { _, _ in
+            rowHover.dismiss()
             updateQuery(items: model.items, clearResults: true)
         }
         .onDisappear {
+            rowHover.dismiss()
             queryGeneration = UUID()
             queryTask?.cancel()
             queryTask = nil
@@ -252,12 +258,15 @@ struct FileOverviewView: View {
                     }
                     .padding(.vertical, 6)
                 }
-                .help(item.relativePath)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .rowHoverCard(.file(item), id: item.id, controller: rowHover)
             }
             .width(min: 170, ideal: 300)
 
             TableColumn("Sync state") { item in
                 SyncStateLabel(item: item)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .rowHoverCard(.file(item), id: item.id, controller: rowHover)
             }
             .width(min: 140, ideal: 170)
 
@@ -266,7 +275,8 @@ struct FileOverviewView: View {
                     .font(.system(size: 11))
                     .foregroundStyle(.secondary)
                     .monospacedDigit()
-                    .help("Reported logical file size; not local disk usage")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .rowHoverCard(.file(item), id: item.id, controller: rowHover)
             }
             .width(80)
 
@@ -280,6 +290,8 @@ struct FileOverviewView: View {
                 }
                 .font(.system(size: 11))
                 .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .rowHoverCard(.file(item), id: item.id, controller: rowHover)
             }
             .width(80)
         }

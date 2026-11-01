@@ -3,6 +3,7 @@ import SwiftUI
 
 struct DownloadRequestsView: View {
     @EnvironmentObject private var model: DriveViewModel
+    @StateObject private var rowHover = RowHoverController()
     let search: String
 
     private var requests: [DownloadQueueItem] {
@@ -85,7 +86,7 @@ struct DownloadRequestsView: View {
             } else {
                 List {
                     ForEach(requests) { item in
-                        DownloadRequestRow(item: item)
+                        DownloadRequestRow(item: item, rowHover: rowHover)
                             .listRowSeparator(.visible)
                     }
                 }
@@ -110,6 +111,10 @@ struct DownloadRequestsView: View {
             .fixedSize(horizontal: false, vertical: true)
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+        .onChange(of: search) { _, _ in rowHover.dismiss() }
+        .onChange(of: model.rootURL) { _, _ in rowHover.dismiss() }
+        .onChange(of: model.isDryRun) { _, _ in rowHover.dismiss() }
+        .onDisappear { rowHover.dismiss() }
     }
 
     private var queueEmptyState: some View {
@@ -138,6 +143,7 @@ struct DownloadRequestsView: View {
 private struct DownloadRequestRow: View {
     @EnvironmentObject private var model: DriveViewModel
     let item: DownloadQueueItem
+    let rowHover: RowHoverController
 
     var body: some View {
         HStack(alignment: .center, spacing: 13) {
@@ -195,6 +201,7 @@ private struct DownloadRequestRow: View {
         .controlSize(.small)
         .padding(.vertical, 10)
         .accessibilityElement(children: .contain)
+        .rowHoverCard(.request(item, isDryRun: model.isDryRun), id: item.id.uuidString, controller: rowHover)
     }
 
     private var statusTitle: String {

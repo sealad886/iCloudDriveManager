@@ -4,6 +4,7 @@ import SwiftUI
 struct DriveSidebar: View {
     @EnvironmentObject private var model: DriveViewModel
     @Binding var section: DriveSection?
+    @StateObject private var rowHover = RowHoverController()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -90,6 +91,9 @@ struct DriveSidebar: View {
             .fixedSize(horizontal: false, vertical: true)
         }
         .frame(minHeight: 0, maxHeight: .infinity, alignment: .top)
+        .onChange(of: section) { _, _ in rowHover.dismiss() }
+        .onChange(of: model.rootURL) { _, _ in rowHover.dismiss() }
+        .onDisappear { rowHover.dismiss() }
     }
 
     private func sidebarRow(_ destination: DriveSection) -> some View {
@@ -106,6 +110,23 @@ struct DriveSidebar: View {
         .tag(destination)
         .padding(.vertical, 3)
         .accessibilityElement(children: .combine)
+        .rowHoverCard(
+            .navigation(
+                title: destination.title, purpose: purpose(for: destination),
+                count: model.rootURL == nil ? "No folder connected" : countLabel(for: destination)
+            ), id: destination.id, controller: rowHover)
+    }
+
+    private func purpose(for destination: DriveSection) -> String {
+        switch destination {
+        case .all:
+            return "All files and folders discovered in your selected folder, "
+                + "including items with unknown status."
+        case .activity: return "Items with transfer activity reported by macOS in your selected folder."
+        case .cloud: return "Items macOS reports as stored in iCloud without a local copy."
+        case .attention: return "Items with reported version conflicts or local macOS metadata warnings."
+        case .queue: return "This app's download plans and pending requests. Apple controls actual transfer scheduling."
+        }
     }
 
     private func countLabel(for destination: DriveSection) -> String {
